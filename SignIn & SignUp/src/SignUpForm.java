@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 
-public class SignUpForm extends JPanel {
+public class SignUpForm extends JPanel implements ActionListener {
     private final JLabel title, name, email, gender, dob, pass;
     private final JTextField nameField, emailField;
     private final JPasswordField passField;
@@ -115,5 +118,40 @@ public class SignUpForm extends JPanel {
         add(passField);
         add(term);
         add(signUpButton);
+
+        signUpButton.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == signUpButton) {
+            if (term.isSelected()) {
+                String name = nameField.getText();
+                String email = emailField.getText();
+                String gender = male.isSelected() ? "Male" : "Female";
+                String dob = year.getSelectedItem() + "-" + (month.getSelectedIndex() + 1) + "-" + date.getSelectedItem();
+                String pass = new String(passField.getPassword());
+
+                String insertQuery = "INSERT INTO `user` (`Name`, `Email`, `Gender`, `Birthday`, `Password`) VALUES (?, ?, ?, ?, ?)";
+
+                try (Connection connection = DbConnection.getConnection();
+                     PreparedStatement preparedStmt = connection.prepareStatement(insertQuery)) {
+
+                    preparedStmt.setString(1, name);
+                    preparedStmt.setString(2, email);
+                    preparedStmt.setString(3, gender);
+                    preparedStmt.setString(4, dob);
+                    preparedStmt.setString(5, pass);
+
+                    preparedStmt.execute();
+                    JOptionPane.showMessageDialog(null, "Registration Success!!");
+
+                } catch (SQLException exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Registration Failed: " + exception.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please accept the terms & conditions!!");
+            }
+        }
     }
 }

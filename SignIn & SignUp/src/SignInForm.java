@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 
-public class SignInForm extends JPanel {
+public class SignInForm extends JPanel implements ActionListener {
     private final JLabel title, email, pass;
     private final JTextField emailField;
     private final JPasswordField passField;
@@ -45,5 +48,29 @@ public class SignInForm extends JPanel {
         add(pass);
         add(passField);
         add(signInButton);
+
+        signInButton.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == signInButton) {
+                String email = emailField.getText();
+                String pass = new String(passField.getPassword());
+
+                String insertQuery = "SELECT * FROM `user` WHERE Email = ? AND Password = ?;";
+
+                try (Connection connection = DbConnection.getConnection();
+                     PreparedStatement preparedStmt = connection.prepareStatement(insertQuery)) {
+                    preparedStmt.setString(1, email);
+                    preparedStmt.setString(2, pass);
+
+                    preparedStmt.execute();
+                    JOptionPane.showMessageDialog(null, "Login Success!!");
+
+                } catch (SQLException exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Login Failed " + exception.getMessage());
+                }
+        }
     }
 }
