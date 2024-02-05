@@ -55,31 +55,35 @@ public class SignInForm extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == signInButton) {
-            String userEmail = emailField.getText(); // Renamed to avoid confusion with the JLabel email
-            String userPass = new String(passField.getPassword()); // Renamed to avoid confusion with the JLabel pass
+            String userEmail = emailField.getText();
+            String userPass = new String(passField.getPassword());
 
-            // Updated query to select user based on email and password
             String selectQuery = "SELECT * FROM `user` WHERE Email = ? AND Password = ?;";
 
-            try (Connection connection = DbConnection.getConnection();
-                 PreparedStatement preparedStmt = connection.prepareStatement(selectQuery)) {
+            if (!userEmail.isEmpty()  && !userPass.isEmpty()){
+                try (Connection connection = DbConnection.getConnection();
+                     PreparedStatement preparedStmt = connection.prepareStatement(selectQuery)) {
 
-                preparedStmt.setString(1, userEmail);
-                preparedStmt.setString(2, userPass);
+                    preparedStmt.setString(1, userEmail);
+                    preparedStmt.setString(2, userPass);
 
-                ResultSet resultSet = preparedStmt.executeQuery();
-                if (resultSet.next()) {
-                    // This means at least one row was returned, so login credentials are correct.
-                    JOptionPane.showMessageDialog(null, "Login Success!!");
-                } else {
-                    // If resultSet is empty, no user matches the provided credentials.
-                    JOptionPane.showMessageDialog(null, "Login Failed: Incorrect email or password");
+                    ResultSet resultSet = preparedStmt.executeQuery();
+                    if (resultSet.next()) {
+                        // at least 1 matching data in table (email is set as unique. so, at most 1 match)
+                        JOptionPane.showMessageDialog(null, "Login Success!!");
+                    } else {
+                        // 0 matching data in table
+                        JOptionPane.showMessageDialog(null, "Login Failed: Incorrect email or password");
+                    }
+
+                } catch (SQLException exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Login Failed: " + exception.getMessage());
                 }
-
-            } catch (SQLException exception) {
-                exception.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Login Failed: " + exception.getMessage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Please Fill ALL fields");
             }
+
         }
     }
 
