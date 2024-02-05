@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class Window extends JFrame {
     public Window() {
-        setTitle("Sign Form");
+        setTitle("Sign In/Up Form");
         setBounds(500, 10, 500, 750);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
