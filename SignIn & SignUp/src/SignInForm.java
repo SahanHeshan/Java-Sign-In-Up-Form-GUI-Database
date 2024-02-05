@@ -52,25 +52,35 @@ public class SignInForm extends JPanel implements ActionListener {
         signInButton.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == signInButton) {
-                String email = emailField.getText();
-                String pass = new String(passField.getPassword());
+            String userEmail = emailField.getText(); // Renamed to avoid confusion with the JLabel email
+            String userPass = new String(passField.getPassword()); // Renamed to avoid confusion with the JLabel pass
 
-                String insertQuery = "SELECT * FROM `user` WHERE Email = ? AND Password = ?;";
+            // Updated query to select user based on email and password
+            String selectQuery = "SELECT * FROM `user` WHERE Email = ? AND Password = ?;";
 
-                try (Connection connection = DbConnection.getConnection();
-                     PreparedStatement preparedStmt = connection.prepareStatement(insertQuery)) {
-                    preparedStmt.setString(1, email);
-                    preparedStmt.setString(2, pass);
+            try (Connection connection = DbConnection.getConnection();
+                 PreparedStatement preparedStmt = connection.prepareStatement(selectQuery)) {
 
-                    preparedStmt.execute();
+                preparedStmt.setString(1, userEmail);
+                preparedStmt.setString(2, userPass);
+
+                ResultSet resultSet = preparedStmt.executeQuery();
+                if (resultSet.next()) {
+                    // This means at least one row was returned, so login credentials are correct.
                     JOptionPane.showMessageDialog(null, "Login Success!!");
-
-                } catch (SQLException exception) {
-                    exception.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Login Failed " + exception.getMessage());
+                } else {
+                    // If resultSet is empty, no user matches the provided credentials.
+                    JOptionPane.showMessageDialog(null, "Login Failed: Incorrect email or password");
                 }
+
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Login Failed: " + exception.getMessage());
+            }
         }
     }
+
 }
