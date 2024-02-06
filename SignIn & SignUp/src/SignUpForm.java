@@ -131,7 +131,7 @@ public class SignUpForm extends JPanel implements ActionListener {
                 String userGender = male.isSelected() ? "Male" : "Female";
                 String userDOB = year.getSelectedItem() + "-" + (month.getSelectedIndex() + 1) + "-" + date.getSelectedItem();
                 String userPass = new String(passField.getPassword());
-
+                // database table name: user
                 String insertQuery = "INSERT INTO `user` (`Name`, `Email`, `Gender`, `Birthday`, `Password`) VALUES (?, ?, ?, ?, ?)";
                 // Database connection details on DbConnection.java
 

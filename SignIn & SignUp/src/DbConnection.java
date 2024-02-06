@@ -1,8 +1,8 @@
 import java.sql.*;
 public class DbConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/signedUsers"; //sample database
-    private static final String USERNAME = "root";//sample database
-    private static final String PASSWORD = "mysql@123";//sample database
+    private static final String URL = "jdbc:mysql://localhost:3306/signedUsers"; // mysql database
+    private static final String USERNAME = "root";// mysql user
+    private static final String PASSWORD = "mysql@123";// mysql user password
 
     static {
         try {

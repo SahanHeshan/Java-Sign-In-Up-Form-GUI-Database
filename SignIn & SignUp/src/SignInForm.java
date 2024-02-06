@@ -57,9 +57,9 @@ public class SignInForm extends JPanel implements ActionListener {
         if (e.getSource() == signInButton) {
             String userEmail = emailField.getText();
             String userPass = new String(passField.getPassword());
-
+            // database table name: user
             String selectQuery = "SELECT * FROM `user` WHERE Email = ? AND Password = ?;";
-
+            // Database connection details on DbConnection.java
             if (!userEmail.isEmpty()  && !userPass.isEmpty()){
                 try (Connection connection = DbConnection.getConnection();
                      PreparedStatement preparedStmt = connection.prepareStatement(selectQuery)) {
