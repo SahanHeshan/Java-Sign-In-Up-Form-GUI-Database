@@ -32,3 +32,4 @@
 - `SignInForm.java`: GUI form for signing in.
 - `SignUpForm.java`: GUI form for signing up.
 - `Window.java`: Main application window.
+- `DbConnection.java` Database Connection handle.
