@@ -24,7 +24,7 @@ public class SignInForm extends JPanel implements ActionListener {
         email.setBounds(45, 70, 100, 30);
 
         emailField = new JTextField();
-        emailField.setFont(new Font("Arial", Font.PLAIN, 15));
+        emailField.setFont(new Font("Arial", Font.PLAIN, 18));
         emailField.setBounds(195, 70, 250, 30);
 
         pass = new JLabel("Password");
@@ -32,7 +32,7 @@ public class SignInForm extends JPanel implements ActionListener {
         pass.setBounds(45, 120, 100, 30);
 
         passField = new JPasswordField();
-        passField.setFont(new Font("Arial", Font.PLAIN, 15));
+        passField.setFont(new Font("Arial", Font.PLAIN, 18));
         passField.setBounds(195, 120, 250, 30);
 
         signInButton = new JButton("Sign In");
