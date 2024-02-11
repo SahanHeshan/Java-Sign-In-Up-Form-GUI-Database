@@ -60,6 +60,8 @@ public class SignInForm extends JPanel implements ActionListener {
             // database table name: user
             String selectQuery = "SELECT * FROM `user` WHERE Email = ? AND Password = ?;";
             // Database connection details on DbConnection.java
+
+            //proceed only if all fields are not null
             if (!userEmail.isEmpty()  && !userPass.isEmpty()){
                 try (Connection connection = DbConnection.getConnection();
                      PreparedStatement preparedStmt = connection.prepareStatement(selectQuery)) {

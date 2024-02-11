@@ -7,22 +7,23 @@ public class Validations {
     private static Connection connection;
     private static PreparedStatement preparedStatement;
     private static ResultSet resultSet;
-
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
     private static final Pattern pattern = Pattern.compile(EMAIL_REGEX);
 
+    // email valid pattern checker
     public static boolean isValidEmail(String email) {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+    // email duplication checker
     public static boolean isDuplicateEmail(String email) {
         boolean isDuplicate = false;
         String selectQuery = "SELECT COUNT(*) FROM `user` WHERE `Email` = ?";
 
         try (Connection connection = DbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
-
-            preparedStatement.setString(1, email);
+             preparedStatement.setString(1, email);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {

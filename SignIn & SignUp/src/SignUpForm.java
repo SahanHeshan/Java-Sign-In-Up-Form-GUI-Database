@@ -3,14 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SignUpForm extends JPanel implements ActionListener {
     private final JLabel title, name, email, gender, dob, pass;
-    private final JTextField nameField, emailField;
-    private final JPasswordField passField;
+    private final JTextField nameField, emailField, passField;
     private final JRadioButton male, female;
     private final ButtonGroup gengp;
     private final JComboBox<String> date, month, year;
@@ -90,7 +86,7 @@ public class SignUpForm extends JPanel implements ActionListener {
         pass.setFont(new Font("Arial", Font.BOLD, 20));
         pass.setBounds(45, 270, 100, 30);
 
-        passField = new JPasswordField();
+        passField = new JTextField();
         passField.setFont(new Font("Arial", Font.PLAIN, 18));
         passField.setBounds(195, 270, 250, 30);
 
@@ -126,20 +122,25 @@ public class SignUpForm extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        // check button is clicked
         if (e.getSource() == signUpButton) {
+            // check terms checkbox ticked
             if (term.isSelected()) {
+                // check email is in valid format
                 if (Validations.isValidEmail(emailField.getText())) {
+                    // check email already in database, prevent duplicates
                     if (!Validations.isDuplicateEmail(emailField.getText())) {
                         String userName = nameField.getText();
                         String userEmail = emailField.getText();
                         String userGender = male.isSelected() ? "Male" : "Female";
                         String userDOB = year.getSelectedItem() + "-" + (month.getSelectedIndex() + 1) + "-" + date.getSelectedItem();
-                        String userPass = new String(passField.getPassword());
+                        String userPass = passField.getText();
                         // database table name: user
                         String insertQuery = "INSERT INTO `user` (`Name`, `Email`, `Gender`, `Birthday`, `Password`) VALUES (?, ?, ?, ?, ?)";
                         // Database connection details on DbConnection.java
 
-                        if (!userName.isEmpty() && !userEmail.isEmpty() && !userPass.isEmpty()) { // proceed only if not null
+                        // proceed only if all are not null
+                        if (!userName.isEmpty() && !userEmail.isEmpty() && !userPass.isEmpty()) {
                             try (Connection connection = DbConnection.getConnection();
                                  PreparedStatement preparedStmt = connection.prepareStatement(insertQuery)) {
 
@@ -162,12 +163,12 @@ public class SignUpForm extends JPanel implements ActionListener {
                     } else{
                         JOptionPane.showMessageDialog(null, "Email already exists");
                     }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Please enter a valid email address");
-                    }
-                    }else {
-                        JOptionPane.showMessageDialog(null, "Please accept the terms & conditions or input valid email address");
-                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address");
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Please accept the terms & conditions");
+            }
         }
     }
 }
