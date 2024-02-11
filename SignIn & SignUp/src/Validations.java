@@ -4,9 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validations {
-    private static Connection connection;
-    private static PreparedStatement preparedStatement;
-    private static ResultSet resultSet;
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
     private static final Pattern pattern = Pattern.compile(EMAIL_REGEX);
 
