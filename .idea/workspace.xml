@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b01e990d-5641-49b8-8b07-e66b554c3b4f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_8_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_8_2_0__2_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java-Sign-In-Up-Form--GUI---Database-.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Java-Sign-In-Up-Form--GUI---Database-/DbConnection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Java-Sign-In-Up-Form--GUI---Database-/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Java-Sign-In-Up-Form--GUI---Database-/SignInForm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Java-Sign-In-Up-Form--GUI---Database-/SignUpForm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Java-Sign-In-Up-Form--GUI---Database-/Validations.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Java-Sign-In-Up-Form--GUI---Database-/Window.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +19,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2cD9AMTNXEsySd4O5NQfucW96Ba" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -45,6 +33,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/sahan/Documents/GitHub/Java-Sign-In-Up-Form--GUI---Database-/SignIn & SignUp",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,6 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1707635141327</updated>
       <workItem from="1707635146038" duration="2166000" />
+      <workItem from="1707637341016" duration="638000" />
     </task>
     <servers />
   </component>
